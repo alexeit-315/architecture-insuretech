@@ -1,0 +1,44 @@
+schema:
+  query: Query
+
+types:
+  Query:
+    description: "Корневой тип для всех запросов"
+    fields:
+      client:
+        type: Client
+        args:
+          id:
+            type: ID!
+            description: "ID клиента"
+        description: "Получить информацию о клиенте по ID"
+
+  Client:
+    description: "Клиент"
+    fields:
+      id: ID!
+      name: String
+      age: Int
+      documents:
+        type: [Document!]
+        description: "Документы клиента"
+      relatives:
+        type: [Relative!]
+        description: "Родственники клиента"
+
+  Document:
+    description: "Документ клиента"
+    fields:
+      id: ID!
+      type: String
+      number: String
+      issueDate: String
+      expiryDate: String
+
+  Relative:
+    description: "Родственник клиента"
+    fields:
+      id: ID!
+      relationType: String
+      name: String
+      age: Int
