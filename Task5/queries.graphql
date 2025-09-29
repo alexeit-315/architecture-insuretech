@@ -1,0 +1,108 @@
+# =============================================================================
+# БАЗОВЫЕ ЗАПРОСЫ (эквиваленты REST API операций)
+# =============================================================================
+
+# Эквивалент: GET /clients/{id}
+query GetClientBasic($id: ID!) {
+  client(id: $id) {
+    id
+    name
+    age
+  }
+}
+
+# Эквивалент: GET /clients/{id}/documents
+query GetClientDocuments($id: ID!) {
+  client(id: $id) {
+    id
+    documents {
+      id
+      type
+      number
+      issueDate
+      expiryDate
+    }
+  }
+}
+
+# Эквивалент: GET /clients/{id}/relatives
+query GetClientRelatives($id: ID!) {
+  client(id: $id) {
+    id
+    relatives {
+      id
+      relationType
+      name
+      age
+    }
+  }
+}
+
+# =============================================================================
+# РАСШИРЕННЫЕ ЗАПРОСЫ (повышение гибкости и эффективности)
+# =============================================================================
+
+# Полная информация о клиенте (все три REST вызова в одном запросе)
+query GetClientFullInfo($id: ID!) {
+  client(id: $id) {
+    id
+    name
+    age
+    documents {
+      id
+      type
+      number
+      issueDate
+      expiryDate
+    }
+    relatives {
+      id
+      relationType
+      name
+      age
+    }
+  }
+}
+
+# Запрос для оформления страховки (только необходимые данные)
+query GetClientForInsuranceApplication($id: ID!) {
+  client(id: $id) {
+    id
+    name
+    age
+    documents {
+      type
+      number
+      issueDate
+    }
+  }
+}
+
+# Запрос для семейных страховок
+query GetClientForFamilyInsurance($id: ID!) {
+  client(id: $id) {
+    id
+    name
+    age
+    relatives {
+      relationType
+      name
+      age
+    }
+  }
+}
+
+# Запрос для проверки документов (только документы с деталями)
+query GetClientDocumentsDetailed($id: ID!) {
+  client(id: $id) {
+    id
+    name
+    documents {
+      id
+      type
+      number
+      issueDate
+      expiryDate
+    }
+  }
+}
