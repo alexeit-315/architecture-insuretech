@@ -1,0 +1,32 @@
+# schema.graphql
+schema {
+  query: Query
+}
+
+type Query {
+  "Получить информацию о клиенте по ID"
+  client(id: ID!): Client
+}
+
+type Client {
+  id: ID!
+  name: String!
+  age: Int!
+  documents: [Document!]
+  relatives: [Relative]
+}
+
+type Document {
+  id: ID!
+  type: String!
+  number: String!
+  issueDate: String!
+  expiryDate: String
+}
+
+type Relative {
+  id: ID!
+  relationType: String!
+  name: String!
+  age: Int!
+}
